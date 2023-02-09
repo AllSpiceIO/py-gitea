@@ -38,7 +38,7 @@ class AllSpice_Proto(object):
 
         # Load URL and access token from environmental variables
         try:
-            URL = os.environ['ALLSPICE_URL']
+            self.URL = os.environ['ALLSPICE_URL']
             # URL = "https://allspice.dev"
         except:
             self.log.error(f'ALLSPICE_URL is None, run >export ALLSPICE_URL="yourURL"')
@@ -47,7 +47,7 @@ class AllSpice_Proto(object):
         try:
             TOKEN = os.environ['ALLSPICE_ACCESS_TOKEN']
         except:
-            self.log.error(f'ALLSPICE_ACCESS_TOKEN is None, run >export ALLSPICE_ACCESS_TOKEN="token", create token at {URL}/user/settings/applications')
+            self.log.error(f'ALLSPICE_ACCESS_TOKEN is None, run >export ALLSPICE_ACCESS_TOKEN="token", create token at {self.URL}/user/settings/applications')
             self.log.error(f'ALLSPICE_ACCESS_TOKEN is None, follow instructions to generate token: https://allspice.document360.io/docs/how-to-create-an-allspice-authentication-application-access-token')
             return False
 
@@ -56,15 +56,16 @@ class AllSpice_Proto(object):
         allspice = None
         # URL = "https://hub.allspice.io"
         try:
-            self.hub = Gitea(URL, TOKEN)
+            self.hub = Gitea(self.URL, TOKEN)
         except:
-            self.log.error(f'Failure on gitea = Gitea(URL, TOKEN), i.e gitea = Gitea({URL}, **hidden**), {self.hub}')
+            self.log.error(f'Failure on gitea = Gitea(URL, TOKEN), i.e gitea = Gitea({self.URL}, **hidden**), {self.hub}')
 
         return True
 
     foo="bar"
     log = None
     hub = None
+    ULR = ""
 
 
 
